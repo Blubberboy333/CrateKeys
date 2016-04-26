@@ -1,7 +1,7 @@
 # Are players allowed to give other players CrateKeys? (This applies to ops only)
 PlayerGive: false
 
-# Where is the CrateKey chest located?
+# Where is the CrateKey block located?
 X: 0
 Y: 0
 Z: 0
@@ -16,3 +16,9 @@ Items:
   - "265"
   - "364"
   - "388"
+  
+# List of commands to run when a player gets a CrateKey
+# Use {PLAYER} for the player, and {NAME} for the player's name
+Commands:
+    - say {NAME} got a CrateKey!
+    - tell {PLAYER} Thank you for buying a CrateKey! You can use your CrateKey where the CrateKey block is placed.
