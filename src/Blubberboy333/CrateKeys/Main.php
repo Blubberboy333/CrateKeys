@@ -30,25 +30,43 @@ class Main extends PluginBase implements Listener{
 	
 	public function onCommand(CommandSender $sender, Command $command, $label, array $args){
 		if(strtolower($command->getName()) == "cratekey"){
-			if($this->getConfig()->get("PlayerGive") == false && $sender instanceof Player){
-				$sender->sendMessage(TextFormat::RED."You don't have permission to use that command!");
-				return true;
-			}else{
-				if(isset($args[0])){
-					$player = $this->getServer()->getPlayer($args[0]);
-					if($player instanceof Player){
-						$name = $player->getName();
-						$item = Item::get("tripwire_hook");
-						$player->getInventory()->addItem($item);
-						$commands = $this->getConfig()->get("Commands");
-						foreach($commands as $i){
-							$this->getServer()->dispatchCommand(new ConsoleCommandSender, str_replace(array("{PLAYER}", "{NAME}"), $player, $player->getName())));
+			if($sender->hasPermission("cratekey") || $sender->hasPermission("cratekey.give")){
+				if($this->getConfig()->get("PlayerGive") == false && $sender instanceof Player){
+					$sender->sendMessage(TextFormat::RED."You don't have permission to use that command!");
+					return true;
+				}else{
+					if(isset($args[0])){
+						$player = $this->getServer()->getPlayer($args[0]);
+						if($player instanceof Player){
+							$name = $player->getName();
+							$item = Item::get("tripwire_hook");
+							$player->getInventory()->addItem($item);
+							$commands = $this->getConfig()->get("Commands");
+							foreach($commands as $i){
+								$this->getServer()->dispatchCommand(new ConsoleCommandSender, str_replace(array("{PLAYER}", "{NAME}"), $player, $player->getName())));
+							}
+							$sender->sendMessage("Gave ".$player->getName()." a CrateKey!");
+							if($sender instanceof Player){
+								$this->getLogger()->info(TextFormat::YELLOW.$sender->getName()." gave ".$name." a CrateKey!");
+							}
+							return true;
+						}else{
+							$sender->sendMessage("That player isn't online!");
+							return true;
 						}
-						$sender->sendMessage("Gave ".$player->getName()." a CrateKey!");
-						return true;
+					}else{
+						$sender->sendMessage("You need to specify a player!");
+						return false;
 					}
 				}
+			}else{
+				$sender->sendMessage(TextFormat::RED."You don't have permission to do that!");
+				return true;
 			}
 		}
+	}
+	
+	public function onPlayerInteractEvent(PlayerInteractEvent $event){
+		$itemInHand = 
 	}
 }
