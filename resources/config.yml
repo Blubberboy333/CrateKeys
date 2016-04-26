@@ -1,1 +1,18 @@
+# Are players allowed to give other players CrateKeys? (This applies to ops only)
+PlayerGive: false
 
+# Where is the CrateKey chest located?
+X: 0
+Y: 0
+Z: 0
+world: world
+
+# How many items will the player recieve when they use a CrateKey?
+Number: 4
+
+# List of items to give a player when they use a CrateKey. This will be randomised
+Items:
+  - "264"
+  - "265"
+  - "364"
+  - "388"
