@@ -67,6 +67,7 @@ class Main extends PluginBase implements Listener{
 	}
 	
 	public function onPlayerInteractEvent(PlayerInteractEvent $event){
-		$itemInHand = 
+		$player = $event->getPlayer();
+		$heldItem= $player->getInvetory()->getItemInHand();
 	}
 }
