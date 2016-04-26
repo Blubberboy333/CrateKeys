@@ -38,7 +38,14 @@ class Main extends PluginBase implements Listener{
 					$player = $this->getServer()->getPlayer($args[0]);
 					if($player instanceof Player){
 						$name = $player->getName();
-						
+						$item = Item::get("tripwire_hook");
+						$player->getInventory()->addItem($item);
+						$commands = $this->getConfig()->get("Commands");
+						foreach($commands as $i){
+							$this->getServer()->dispatchCommand(new ConsoleCommandSender, str_replace(array("{PLAYER}", "{NAME}"), $player, $player->getName())));
+						}
+						$sender->sendMessage("Gave ".$player->getName()." a CrateKey!");
+						return true;
 					}
 				}
 			}
