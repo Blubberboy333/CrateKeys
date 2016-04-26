@@ -1,0 +1,17 @@
+name: CrateKeys
+version: 0.0.1
+api: [2.0.0]
+main: Blubberboy333\CrateKeys\Main
+commands:
+    cratekey:
+        usage: /cratekey <player>
+        description: Gives a player a crate key
+        permission: cratekey.give
+permissions:
+    cratekey:
+        default: false
+        description: Allows the player to use all of the CrateKey functions
+        children:
+            cratekey.give:
+                default: false
+                description: Allows the player to give another player a CrateKey
