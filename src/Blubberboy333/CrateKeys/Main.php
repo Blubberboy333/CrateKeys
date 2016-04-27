@@ -69,5 +69,18 @@ class Main extends PluginBase implements Listener{
 	public function onPlayerInteractEvent(PlayerInteractEvent $event){
 		$player = $event->getPlayer();
 		$heldItem= $player->getInvetory()->getItemInHand();
+		$block = $event->getBlock();
+		$location = array($block->x, $block->y, $block->z);
+		$level = $block->getLevel();
+		if($heldItem = Item::get(131)){
+			if($location[0] == $this->getConfig()->get("X") && $location[1] == $this->getConfig()->get("Y") && $location[2] == $this->getConfig()->get("Z") && $lvel == $this->getConfig()->get("World")){
+				for($i = 1; $i <= $this->getConfig()->get("Number"); $i++){
+					$rand = $this->getConfig()->get("Items");
+					$player->getInventory()->addItem(Item::get($rand));
+				}
+			}
+		}else{
+			$player->sendMessage(TextFormat::YELLOW."You need to be holding a CrateKey to get CrateKey items!");
+		}
 	}
 }
